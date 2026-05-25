@@ -24,13 +24,14 @@ export function SiteNavbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 md:h-24 md:px-6">
-        <Link href="/" className="flex shrink-0 items-center gap-3">
-          <BrandLogo size="sm" />
-          <span className="hidden leading-tight sm:block">
-            <span className="block text-lg font-black uppercase tracking-wider text-primary">
+        <Link href="/" className="flex min-w-0 max-w-[58%] items-center gap-2 sm:max-w-none sm:gap-3">
+          <BrandLogo size="xs" className="sm:hidden" />
+          <BrandLogo size="sm" className="hidden sm:block" />
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate text-[11px] font-black uppercase tracking-wide text-primary sm:text-lg sm:tracking-wider">
               Atlas Agdez Gym
             </span>
-            <span className="block text-sm font-bold text-foreground">
+            <span className="block truncate text-[10px] font-bold text-foreground sm:text-sm">
               قاعة كمال الأجسام
             </span>
           </span>
