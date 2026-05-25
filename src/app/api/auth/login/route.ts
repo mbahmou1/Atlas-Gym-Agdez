@@ -3,16 +3,6 @@ import { verifyLogin, createSession } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
   try {
-    const secret = process.env.AUTH_SECRET;
-    if (!secret || secret.length < 16) {
-      return NextResponse.json(
-        {
-          error:
-            "إعداد السيرفر ناقص (AUTH_SECRET). أضفه في Vercel → Settings → Environment Variables ثم Redeploy.",
-        },
-        { status: 503 }
-      );
-    }
     const { email, identifier, password } = await request.json();
     const loginIdentifier = identifier || email;
     if (!loginIdentifier || !password) {

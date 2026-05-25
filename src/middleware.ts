@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
+import { getAuthSecretBytes } from "@/lib/auth-secret";
 
 const COOKIE_NAME = "atlasgym_session";
 
 function getSecret() {
-  const secret = process.env.AUTH_SECRET;
-  if (!secret) return null;
-  return new TextEncoder().encode(secret);
+  return getAuthSecretBytes();
 }
 
 const PUBLIC_PAGES = ["/", "/gym", "/shop", "/contact", "/faq", "/login"];
@@ -60,7 +59,7 @@ export async function middleware(request: NextRequest) {
   const secret = getSecret();
 
   if (pathname.startsWith("/api/")) {
-    if (!token || !secret) {
+    if (!token) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     try {
@@ -73,7 +72,7 @@ export async function middleware(request: NextRequest) {
 
   if (isAdminPage(pathname) || pathname === "/login") {
     if (pathname === "/login") {
-      if (token && secret) {
+      if (token) {
         try {
           await jwtVerify(token, secret);
           return NextResponse.redirect(new URL("/dashboard", request.url));
@@ -84,7 +83,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    if (!token || !secret) {
+    if (!token) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
     try {

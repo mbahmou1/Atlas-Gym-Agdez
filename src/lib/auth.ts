@@ -1,6 +1,7 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import bcrypt from "bcryptjs";
+import { getAuthSecretBytes } from "./auth-secret";
 import { getSupabase } from "./supabase";
 import * as store from "./store";
 import type { User } from "./types";
@@ -15,9 +16,7 @@ function shouldUseSecureSessionCookie(): boolean {
 }
 
 function getSecret() {
-  const secret = process.env.AUTH_SECRET;
-  if (!secret || secret.length < 16) throw new Error("AUTH_SECRET must be at least 16 characters");
-  return new TextEncoder().encode(secret);
+  return getAuthSecretBytes();
 }
 
 export async function createSession(user: User) {
