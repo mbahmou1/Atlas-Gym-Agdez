@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-body), "Segoe UI", Tahoma, system-ui, sans-serif;
+  --font-display: var(--font-heading), var(--font-body), sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-surface: var(--surface);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-platinum: var(--brand-platinum);
+}
+
+/*
+  Atlas Agdez — فخامة رياضية
+  أسود عميق + ذهبي أنيق + بلاتين دافئ (مناسب للقاعة والمتجر)
+*/
+:root {
+  --radius: 0.75rem;
+  --brand-gold: #c4a052;
+  --brand-gold-soft: #d4b366;
+  --brand-platinum: #e8e2d6;
+
+  --background: #09090b;
+  --surface: #111113;
+  --foreground: #f4f4f5;
+  --text-secondary: #d4d4d8;
+  --card: #18181b;
+  --card-foreground: #f4f4f5;
+  --primary: #c4a052;
+  --primary-foreground: #09090b;
+  --secondary: #27272a;
+  --secondary-foreground: #e4e4e7;
+  --muted: #1f1f23;
+  --muted-foreground: #b8b8c0;
+  --accent: #e8e2d6;
+  --accent-foreground: #18181b;
+  --destructive: #dc2626;
+  --border: rgba(255, 255, 255, 0.07);
+  --input: #1f1f23;
+  --ring: #c4a052;
+  --sidebar: #0c0c0e;
+  --sidebar-foreground: #d4d4d8;
+  --sidebar-accent: #1f1f23;
+  --sidebar-border: rgba(196, 160, 82, 0.12);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), "Segoe UI", Tahoma, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), var(--font-body), sans-serif;
+  color: var(--foreground);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+a:not([class]) {
+  color: var(--primary);
+}
+
+strong {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.glass-card {
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.gym-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.text-gradient-brand {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #e8e2d6 38%,
+    #d4b366 72%,
+    #c4a052 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 11, 0.4) 0%,
+    rgba(9, 9, 11, 0.72) 50%,
+    rgba(9, 9, 11, 0.96) 100%
+  );
+  box-shadow: inset 0 -120px 80px -40px rgba(196, 160, 82, 0.1);
+}
+
+.section-glow {
+  position: relative;
+}
+
+.section-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 40% at 50% 0%,
+    rgba(196, 160, 82, 0.08),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.brand-bar {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--brand-gold) 20%,
+    var(--brand-platinum) 50%,
+    var(--brand-gold) 80%,
+    transparent 100%
+  );
+  height: 2px;
+  opacity: 0.85;
+}
+
+.premium-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(196, 160, 82, 0.35),
+    transparent
+  );
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(50%); }
+  }
+}
