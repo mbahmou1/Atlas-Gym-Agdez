@@ -19,6 +19,9 @@ import { addMonths, toDateString } from "./utils";
 
 const DB_PATH = path.join(process.cwd(), "data", "atlasgym.json");
 
+/** على Vercel الملف للقراءة فقط — نخزّن في الذاكرة داخل نفس العملية */
+let memoryDb: DbData | null = null;
+
 function getPlanMonths(planType?: string): number {
   if (planType === "yearly") return 12;
   if (planType === "six_months") return 6;
@@ -45,10 +48,12 @@ export function useLocalDb(): boolean {
 }
 
 async function readDb(): Promise<DbData> {
+  if (memoryDb) return memoryDb;
   try {
     const raw = await fs.readFile(DB_PATH, "utf8");
     const parsed = JSON.parse(raw) as DbData;
     const db = ensureShopTables(parsed);
+    memoryDb = db;
     if (!parsed.products) {
       try {
         await writeDb(db);
@@ -167,6 +172,7 @@ async function readDb(): Promise<DbData> {
       orders: [],
       order_items: [],
     };
+    memoryDb = db;
     try {
       await writeDb(db);
     } catch {
@@ -198,8 +204,13 @@ function ensureShopTables(db: DbData): DbData {
 }
 
 async function writeDb(db: DbData) {
-  await fs.mkdir(path.dirname(DB_PATH), { recursive: true });
-  await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2));
+  memoryDb = db;
+  try {
+    await fs.mkdir(path.dirname(DB_PATH), { recursive: true });
+    await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2));
+  } catch {
+    /* serverless: keep changes in memory only for this instance */
+  }
 }
 
 export async function verifyLogin(email: string, password: string): Promise<User | null> {

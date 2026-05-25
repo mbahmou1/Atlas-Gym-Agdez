@@ -58,14 +58,21 @@ export async function getSession(): Promise<User | null> {
 
 export async function verifyLogin(email: string, password: string): Promise<User | null> {
   if (store.useLocalDb()) return store.verifyLogin(email, password);
-  const { data, error } = await getSupabase()
-    .from("users")
-    .select("id, email, name, password_hash")
-    .eq("email", email)
-    .single();
+  const identifier = email.trim().toLowerCase();
+  const normalizedPhone = identifier.replace(/\D/g, "");
+  const supabase = getSupabase();
+  const byEmail = identifier.includes("@");
+  let query = supabase.from("users").select("id, email, name, phone, password_hash");
+  query = byEmail ? query.eq("email", identifier) : query.eq("phone", normalizedPhone);
+  const { data, error } = await query.maybeSingle();
   if (error || !data) return null;
   if (!(await bcrypt.compare(password, data.password_hash))) return null;
-  return { id: data.id, email: data.email, name: data.name, phone: null };
+  return {
+    id: data.id,
+    email: data.email,
+    name: data.name,
+    phone: (data.phone as string | null) ?? null,
+  };
 }
 
 export async function hashPassword(password: string): Promise<string> {
