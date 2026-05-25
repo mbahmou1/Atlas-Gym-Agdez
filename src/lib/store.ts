@@ -225,6 +225,23 @@ export async function verifyLogin(email: string, password: string): Promise<User
   return { id: user.id, email: user.email, name: user.name, phone: user.phone ?? null };
 }
 
+export async function findUserByEmail(email: string) {
+  const normalized = email.trim().toLowerCase();
+  const user = (await readDb()).users.find((u) => u.email.toLowerCase() === normalized);
+  if (!user) return null;
+  return { id: user.id, email: user.email, name: user.name, phone: user.phone ?? null };
+}
+
+export async function resetPasswordByEmail(email: string, newPassword: string) {
+  const db = await readDb();
+  const normalized = email.trim().toLowerCase();
+  const user = db.users.find((u) => u.email.toLowerCase() === normalized);
+  if (!user) return { error: "لم نعثر على حساب بهذا البريد" };
+  user.password_hash = await bcrypt.hash(newPassword, 10);
+  await writeDb(db);
+  return { success: true, email: user.email, phone: user.phone ?? null };
+}
+
 export async function resetPasswordByIdentifier(identifier: string, newPassword: string) {
   const db = await readDb();
   const value = identifier.trim().toLowerCase();

@@ -56,8 +56,11 @@ export default function LoginPage() {
   const [identifier, setIdentifier] = useState("mbahmou@gmail.com");
   const [password, setPassword] = useState("admin123");
   const [showRecover, setShowRecover] = useState(false);
-  const [recoverIdentifier, setRecoverIdentifier] = useState("mbahmou@gmail.com");
+  const [recoverEmail, setRecoverEmail] = useState("mbahmou@gmail.com");
+  const [resetCode, setResetCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [recoverStep, setRecoverStep] = useState<"email" | "code">("email");
   const [recoverMessage, setRecoverMessage] = useState("");
   const [recoverLoading, setRecoverLoading] = useState(false);
   const [error, setError] = useState("");
@@ -81,23 +84,55 @@ export default function LoginPage() {
     }
   }
 
-  async function handleRecover(e: React.FormEvent) {
+  async function handleSendResetCode(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setRecoverMessage("");
     setRecoverLoading(true);
     try {
-      await apiJson("/api/auth/recover", {
+      await apiJson("/api/auth/recover/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ identifier: recoverIdentifier, newPassword }),
+        body: JSON.stringify({ email: recoverEmail }),
       });
-      setRecoverMessage("تم تحديث كلمة السر بنجاح. سجل الدخول بكلمة السر الجديدة.");
-      setPassword(newPassword);
-      setIdentifier(recoverIdentifier);
-      setShowRecover(false);
+      setRecoverStep("code");
+      setRecoverMessage("تم إرسال رمز من 6 أرقام إلى بريدك. تحقق من Gmail (وصندوق Spam).");
+      setResetCode("");
     } catch (err) {
-      setError(getErrorMessage(err, "تعذر استرجاع الحساب"));
+      setError(getErrorMessage(err, "تعذر إرسال الرمز"));
+    } finally {
+      setRecoverLoading(false);
+    }
+  }
+
+  async function handleConfirmReset(e: React.FormEvent) {
+    e.preventDefault();
+    setError("");
+    setRecoverMessage("");
+    if (newPassword !== confirmPassword) {
+      setError("كلمة السر الجديدة غير متطابقة");
+      return;
+    }
+    setRecoverLoading(true);
+    try {
+      await apiJson("/api/auth/recover/confirm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: recoverEmail,
+          code: resetCode,
+          newPassword,
+        }),
+      });
+      setRecoverMessage("تم تحديث كلمة السر. سجّل الدخول الآن.");
+      setPassword(newPassword);
+      setIdentifier(recoverEmail);
+      setShowRecover(false);
+      setRecoverStep("email");
+      setResetCode("");
+      setConfirmPassword("");
+    } catch (err) {
+      setError(getErrorMessage(err, "تعذر تأكيد الرمز"));
     } finally {
       setRecoverLoading(false);
     }
@@ -217,6 +252,8 @@ export default function LoginPage() {
                     setShowRecover(!showRecover);
                     setError("");
                     setRecoverMessage("");
+                    setRecoverStep("email");
+                    setResetCode("");
                   }}
                   className="mt-4 flex w-full items-center justify-center gap-2 text-sm font-bold text-primary hover:underline"
                 >
@@ -225,43 +262,103 @@ export default function LoginPage() {
                 </button>
 
                 {showRecover && (
-                  <form onSubmit={handleRecover} className="mt-4 space-y-4 rounded-xl border border-border bg-muted/30 p-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="recoverIdentifier">استرجاع الحساب بالبريد أو النمرة</Label>
-                      <Input
-                        id="recoverIdentifier"
-                        type="text"
-                        value={recoverIdentifier}
-                        onChange={(e) => setRecoverIdentifier(e.target.value)}
-                        placeholder="mbahmou@gmail.com أو 0687048566"
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="newPassword">كلمة السر الجديدة</Label>
-                      <Input
-                        id="newPassword"
-                        type="password"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        placeholder="على الأقل 6 أحرف"
-                        required
-                      />
-                    </div>
-                    {recoverMessage && (
-                      <p className="text-center text-sm font-bold text-primary">{recoverMessage}</p>
+                  <div className="mt-4 space-y-4 rounded-xl border border-border bg-muted/30 p-4">
+                    {recoverStep === "email" ? (
+                      <form onSubmit={handleSendResetCode} className="space-y-4">
+                        <p className="text-sm text-muted-foreground text-center">
+                          سنرسل رمز تحقق إلى بريدك الإلكتروني (Gmail)، ثم تدخل الرمز وكلمة سر جديدة.
+                        </p>
+                        <div className="space-y-2">
+                          <Label htmlFor="recoverEmail">البريد الإلكتروني</Label>
+                          <Input
+                            id="recoverEmail"
+                            type="email"
+                            value={recoverEmail}
+                            onChange={(e) => setRecoverEmail(e.target.value)}
+                            placeholder="mbahmou@gmail.com"
+                            required
+                          />
+                        </div>
+                        {recoverMessage && (
+                          <p className="text-center text-sm font-bold text-primary">{recoverMessage}</p>
+                        )}
+                        <Button type="submit" variant="outline" className="w-full" disabled={recoverLoading}>
+                          {recoverLoading ? (
+                            <>
+                              <Loader2 className="animate-spin" />
+                              جاري الإرسال...
+                            </>
+                          ) : (
+                            "إرسال الرمز إلى البريد"
+                          )}
+                        </Button>
+                      </form>
+                    ) : (
+                      <form onSubmit={handleConfirmReset} className="space-y-4">
+                        <p className="text-sm text-muted-foreground text-center">
+                          الرمز مُرسل إلى <strong className="text-foreground">{recoverEmail}</strong>
+                        </p>
+                        <div className="space-y-2">
+                          <Label htmlFor="resetCode">رمز التحقق (6 أرقام)</Label>
+                          <Input
+                            id="resetCode"
+                            type="text"
+                            inputMode="numeric"
+                            maxLength={6}
+                            value={resetCode}
+                            onChange={(e) => setResetCode(e.target.value.replace(/\D/g, ""))}
+                            placeholder="123456"
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="newPassword">كلمة السر الجديدة</Label>
+                          <Input
+                            id="newPassword"
+                            type="password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            placeholder="على الأقل 6 أحرف"
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="confirmPassword">تأكيد كلمة السر</Label>
+                          <Input
+                            id="confirmPassword"
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                          />
+                        </div>
+                        {recoverMessage && (
+                          <p className="text-center text-sm font-bold text-primary">{recoverMessage}</p>
+                        )}
+                        <Button type="submit" className="w-full" disabled={recoverLoading}>
+                          {recoverLoading ? (
+                            <>
+                              <Loader2 className="animate-spin" />
+                              جاري التأكيد...
+                            </>
+                          ) : (
+                            "تأكيد وتحديث كلمة السر"
+                          )}
+                        </Button>
+                        <button
+                          type="button"
+                          className="w-full text-sm text-primary hover:underline"
+                          onClick={() => {
+                            setRecoverStep("email");
+                            setRecoverMessage("");
+                            setError("");
+                          }}
+                        >
+                          إرسال رمز جديد
+                        </button>
+                      </form>
                     )}
-                    <Button type="submit" variant="outline" className="w-full" disabled={recoverLoading}>
-                      {recoverLoading ? (
-                        <>
-                          <Loader2 className="animate-spin" />
-                          جاري التحديث...
-                        </>
-                      ) : (
-                        "تحديث كلمة السر"
-                      )}
-                    </Button>
-                  </form>
+                  </div>
                 )}
               </CardContent>
             </Card>
