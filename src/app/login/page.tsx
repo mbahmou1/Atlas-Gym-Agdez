@@ -53,10 +53,10 @@ const FEATURES = [
 export default function LoginPage() {
   const { t } = useLanguage();
   const [showLogin, setShowLogin] = useState(false);
-  const [identifier, setIdentifier] = useState("mbahmou@gmail.com");
-  const [password, setPassword] = useState("admin123");
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
   const [showRecover, setShowRecover] = useState(false);
-  const [recoverEmail, setRecoverEmail] = useState("mbahmou@gmail.com");
+  const [recoverEmail, setRecoverEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [recoverMessage, setRecoverMessage] = useState("");
@@ -189,7 +189,8 @@ export default function LoginPage() {
                       type="text"
                       value={identifier}
                       onChange={(e) => setIdentifier(e.target.value)}
-                      placeholder="mbahmou@gmail.com أو 0687048566"
+                      placeholder="البريد الإلكتروني أو رقم الهاتف"
+                      autoComplete="username"
                       required
                     />
                   </div>
@@ -200,6 +201,8 @@ export default function LoginPage() {
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••"
+                      autoComplete="current-password"
                       required
                     />
                   </div>
@@ -245,7 +248,7 @@ export default function LoginPage() {
                         type="email"
                         value={recoverEmail}
                         onChange={(e) => setRecoverEmail(e.target.value)}
-                        placeholder="mbahmou@gmail.com"
+                        placeholder="example@gmail.com"
                         required
                       />
                     </div>
