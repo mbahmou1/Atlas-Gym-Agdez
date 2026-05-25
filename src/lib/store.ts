@@ -47,8 +47,15 @@ export function useLocalDb(): boolean {
 async function readDb(): Promise<DbData> {
   try {
     const raw = await fs.readFile(DB_PATH, "utf8");
-    const db = ensureShopTables(JSON.parse(raw) as DbData);
-    if (!JSON.parse(raw).products) await writeDb(db);
+    const parsed = JSON.parse(raw) as DbData;
+    const db = ensureShopTables(parsed);
+    if (!parsed.products) {
+      try {
+        await writeDb(db);
+      } catch {
+        /* read-only env */
+      }
+    }
     return db;
   } catch {
     const start = new Date();
@@ -160,7 +167,11 @@ async function readDb(): Promise<DbData> {
       orders: [],
       order_items: [],
     };
-    await writeDb(db);
+    try {
+      await writeDb(db);
+    } catch {
+      /* Vercel/serverless: filesystem read-only — use in-memory db */
+    }
     return db;
   }
 }
