@@ -8,7 +8,12 @@ export const SITE = {
   email: "contact@atlasgym.agdez",
   address: "أكدز أمام اعدادية النخيل",
   addressShort: "أكدز أمام اعدادية النخيل",
+  /** إحداثيات القاعة — للتوجيه الديناميكي من موقع الزائر */
+  coords: { lat: 30.694, lng: -6.437 },
   mapsUrl: "https://maps.app.goo.gl/MRkkzK35maaNhQfd8?g_st=iw",
+  /** إحداثيات القاعة — أكدز (لحساب المسافة والتوجيه) */
+  latitude: 30.694,
+  longitude: -6.437,
   mapEmbed:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10945!2d-6.437!3d30.694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDQxJzM4LjQiTiA2wrAyNicxMy4yIlc!5e0!3m2!1sar!2sma!4v1",
   hours: {
