@@ -1,4 +1,5 @@
 import { MapPin, Navigation } from "lucide-react";
+import { googleMapsDirectionsToGym } from "@/lib/geo";
 import { SITE } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -51,7 +52,7 @@ export function LocationBlock({
       </p>
       {showMapButton && (
         <a
-          href={SITE.mapsUrl}
+          href={googleMapsDirectionsToGym()}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(

@@ -31,9 +31,28 @@ export function distanceToGymKm(userLat: number, userLon: number): number {
   return distanceKm(userLat, userLon, SITE.latitude, SITE.longitude);
 }
 
-/** توجيه Google Maps من موقع المستخدم إلى القاعة */
-export function googleMapsDirectionsUrl(userLat: number, userLon: number): string {
-  const dest = `${SITE.latitude},${SITE.longitude}`;
-  const origin = `${userLat},${userLon}`;
-  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${dest}&travelmode=driving`;
+/**
+ * توجيه من موقعك الحالي → القاعة.
+ * ما كنحددوش origin باش Google Maps ياخد GPS الحقيقي ديالك فالتطبيق.
+ */
+export function googleMapsDirectionsToGym(): string {
+  const destCoords = `${SITE.latitude},${SITE.longitude}`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${destCoords}&travelmode=driving`;
+}
+
+/** @deprecated استعمل googleMapsDirectionsToGym — بلا origin ثابت */
+export function googleMapsDirectionsUrl(_userLat: number, _userLon: number): string {
+  return googleMapsDirectionsToGym();
+}
+
+/** فتح الاتجاهات (أفضل على التيليفون من window.open) */
+export function openDirectionsToGym(): void {
+  if (typeof window === "undefined") return;
+  const url = googleMapsDirectionsToGym();
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (isMobile) {
+    window.location.href = url;
+  } else {
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
 }
