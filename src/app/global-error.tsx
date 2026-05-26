@@ -19,8 +19,8 @@ export default function GlobalError({
           justifyContent: "center",
           gap: 16,
           padding: 24,
-          background: "#09090b",
-          color: "#f4f4f5",
+          background: "#12100d",
+          color: "#f7f0e5",
           fontFamily: "Tahoma, sans-serif",
           textAlign: "center",
         }}
@@ -37,7 +37,7 @@ export default function GlobalError({
             borderRadius: 8,
             border: "none",
             background: "#c4a052",
-            color: "#09090b",
+            color: "#17120b",
             fontWeight: 700,
             cursor: "pointer",
           }}

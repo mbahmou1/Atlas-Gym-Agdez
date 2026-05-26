@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </Script>
       <body
         className={`${fontBody.variable} ${fontHeading.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
-        style={{ backgroundColor: "#09090b", color: "#f4f4f5" }}
+        style={{ backgroundColor: "#12100d", color: "#f7f0e5" }}
       >
         <LanguageProvider>
           <CartProvider>{children}</CartProvider>

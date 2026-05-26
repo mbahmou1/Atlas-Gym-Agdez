@@ -18,7 +18,7 @@ export function LocationBlock({
       className={cn(
         "flex flex-col",
         isHero
-          ? "mx-auto max-w-md items-center text-center rounded-2xl border border-white/15 bg-black/45 px-6 py-5 backdrop-blur-md"
+          ? "mx-auto max-w-md items-center text-center rounded-2xl border border-primary/25 bg-[#17120d]/70 px-6 py-5 shadow-2xl shadow-primary/10 backdrop-blur-md"
           : "items-start text-start rounded-xl border border-border bg-card/80 px-5 py-4",
         className
       )}

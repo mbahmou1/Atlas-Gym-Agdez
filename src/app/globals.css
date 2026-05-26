@@ -30,40 +30,47 @@
 
 /*
   Atlas Agdez — فخامة رياضية
-  أسود عميق + ذهبي أنيق + بلاتين دافئ (مناسب للقاعة والمتجر)
+  فحمي دافئ + ذهبي أنيق + بلاتين دافئ (مناسب للقاعة والمتجر)
 */
 :root {
   --radius: 0.75rem;
-  --brand-gold: #c4a052;
-  --brand-gold-soft: #d4b366;
-  --brand-platinum: #e8e2d6;
+  --brand-gold: #d1aa5a;
+  --brand-gold-soft: #e0bf73;
+  --brand-platinum: #f0e7d8;
 
-  --background: #09090b;
-  --surface: #111113;
-  --foreground: #f4f4f5;
-  --text-secondary: #d4d4d8;
-  --card: #18181b;
-  --card-foreground: #f4f4f5;
-  --primary: #c4a052;
-  --primary-foreground: #09090b;
-  --secondary: #27272a;
-  --secondary-foreground: #e4e4e7;
-  --muted: #1f1f23;
-  --muted-foreground: #b8b8c0;
-  --accent: #e8e2d6;
-  --accent-foreground: #18181b;
+  --background: #12100d;
+  --surface: #19150f;
+  --foreground: #f7f0e5;
+  --text-secondary: #ddd1bf;
+  --card: #201a12;
+  --card-foreground: #f7f0e5;
+  --primary: #d1aa5a;
+  --primary-foreground: #17120b;
+  --secondary: #2b2419;
+  --secondary-foreground: #efe5d5;
+  --muted: #251f17;
+  --muted-foreground: #c9baa5;
+  --accent: #f0e7d8;
+  --accent-foreground: #1f1a13;
   --destructive: #dc2626;
-  --border: rgba(255, 255, 255, 0.07);
-  --input: #1f1f23;
-  --ring: #c4a052;
-  --sidebar: #0c0c0e;
-  --sidebar-foreground: #d4d4d8;
-  --sidebar-accent: #1f1f23;
-  --sidebar-border: rgba(196, 160, 82, 0.12);
+  --border: rgba(209, 170, 90, 0.16);
+  --input: #251f17;
+  --ring: #d1aa5a;
+  --sidebar: #15110c;
+  --sidebar-foreground: #ddd1bf;
+  --sidebar-accent: #251f17;
+  --sidebar-border: rgba(209, 170, 90, 0.16);
+}
+
+html {
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at top right, rgba(209, 170, 90, 0.16), transparent 34rem),
+    radial-gradient(circle at 12% 8%, rgba(240, 231, 216, 0.055), transparent 28rem),
+    linear-gradient(180deg, #19150f 0%, var(--background) 42%, #15110d 100%);
   color: var(--foreground);
   font-family: var(--font-body), "Segoe UI", Tahoma, sans-serif;
   font-size: 1rem;
@@ -95,21 +102,21 @@ strong {
 }
 
 .glass-card {
-  background: color-mix(in srgb, var(--card) 92%, transparent);
+  background: color-mix(in srgb, var(--card) 90%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    0 14px 36px rgba(12, 8, 3, 0.28),
+    inset 0 1px 0 rgba(240, 231, 216, 0.055);
 }
 
 .gym-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 26px rgba(12, 8, 3, 0.22);
 }
 
 .text-gradient-brand {
@@ -128,11 +135,11 @@ strong {
 .hero-overlay {
   background: linear-gradient(
     180deg,
-    rgba(9, 9, 11, 0.4) 0%,
-    rgba(9, 9, 11, 0.72) 50%,
-    rgba(9, 9, 11, 0.96) 100%
+    rgba(18, 16, 13, 0.35) 0%,
+    rgba(18, 16, 13, 0.66) 50%,
+    rgba(18, 16, 13, 0.94) 100%
   );
-  box-shadow: inset 0 -120px 80px -40px rgba(196, 160, 82, 0.1);
+  box-shadow: inset 0 -120px 80px -40px rgba(209, 170, 90, 0.13);
 }
 
 .section-glow {

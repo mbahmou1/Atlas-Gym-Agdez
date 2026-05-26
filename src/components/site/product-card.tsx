@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#17120d]/85 via-transparent to-transparent" />
         <div className="absolute start-3 top-3 flex gap-2">
           {product.featured && <Badge className="bg-primary text-primary-foreground">مميز</Badge>}
           {product.best_seller && (

@@ -150,8 +150,8 @@ export default function HomePage() {
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 45vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-4 right-4 rounded-xl bg-black/55 px-4 py-2 text-sm font-bold text-white backdrop-blur">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#17120d]/70 via-transparent to-transparent" />
+                <div className="absolute bottom-4 right-4 rounded-xl border border-primary/25 bg-[#17120d]/70 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-primary/10 backdrop-blur">
                   فتنس نسائي قريباً
                 </div>
               </div>
