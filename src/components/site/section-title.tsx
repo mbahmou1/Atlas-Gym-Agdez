@@ -8,7 +8,7 @@ export function SectionTitle({
   subtitle?: string;
 }) {
   return (
-    <div className="mb-10 text-center md:mb-14">
+    <div className="mb-6 text-center md:mb-8">
       {eyebrow && (
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary/90">
           {eyebrow}

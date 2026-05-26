@@ -22,8 +22,8 @@ const GYM_TESTIMONIALS = [
 
 export default function GymPage() {
   return (
-    <div className="pt-8">
-      <section className="relative mx-auto max-w-6xl px-4 pb-12 md:px-6">
+    <div className="pt-5 md:pt-8">
+      <section className="relative mx-auto max-w-6xl px-4 pb-6 md:px-6 md:pb-8">
         <div className="relative aspect-[21/9] overflow-hidden rounded-2xl border border-primary/20">
           <Image src={GYM_IMAGES[0]} alt={SITE.brandLine} fill className="object-cover" priority sizes="100vw" />
           <div className="hero-overlay absolute inset-0 flex flex-col items-center justify-center text-center p-6">
@@ -33,7 +33,7 @@ export default function GymPage() {
         </div>
       </section>
 
-      <MotionSection className="px-4 md:px-6">
+      <MotionSection className="px-4 py-6 md:px-6 md:py-8">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -52,7 +52,7 @@ export default function GymPage() {
         </div>
       </MotionSection>
 
-      <MotionSection className="bg-surface/80 px-4 md:px-6">
+      <MotionSection className="bg-surface/80 px-4 py-8 md:px-6 md:py-10">
         <div className="mx-auto max-w-6xl">
           <SectionTitle title="معرض الصور" />
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
@@ -65,7 +65,7 @@ export default function GymPage() {
         </div>
       </MotionSection>
 
-      <MotionSection className="px-4 md:px-6">
+      <MotionSection className="px-4 py-8 md:px-6 md:py-10">
         <div className="mx-auto max-w-6xl">
           <SectionTitle title="المعدات" />
           <div className="grid gap-6 lg:grid-cols-2 lg:items-center">
@@ -86,7 +86,7 @@ export default function GymPage() {
         </div>
       </MotionSection>
 
-      <MotionSection className="bg-surface/80 px-4 md:px-6">
+      <MotionSection className="bg-surface/80 px-4 py-8 md:px-6 md:py-10">
         <div className="mx-auto max-w-6xl">
           <SectionTitle title="تدريب شخصي" subtitle="خطط غذائية و برامج تمرين." />
           <GlassCard className="flex flex-col gap-4 md:flex-row md:items-center border-primary/20">
@@ -103,7 +103,7 @@ export default function GymPage() {
         </div>
       </MotionSection>
 
-      <MotionSection className="px-4 md:px-6">
+      <MotionSection className="px-4 py-8 md:px-6 md:py-10">
         <div className="mx-auto max-w-6xl">
           <SectionTitle title="أسعار الاشتراك" />
           <div className="grid gap-6 md:grid-cols-3">
@@ -129,7 +129,7 @@ export default function GymPage() {
         </div>
       </MotionSection>
 
-      <MotionSection className="bg-surface/80 px-4 md:px-6">
+      <MotionSection className="bg-surface/80 px-4 py-8 md:px-6 md:py-10">
         <div className="mx-auto max-w-6xl">
           <SectionTitle title="المدرب" />
           <div className="mx-auto grid max-w-sm gap-6">
@@ -153,7 +153,7 @@ export default function GymPage() {
         </div>
       </MotionSection>
 
-      <MotionSection className="px-4 md:px-6">
+      <MotionSection className="px-4 py-8 md:px-6 md:py-10">
         <div className="mx-auto max-w-6xl">
           <SectionTitle title="آراء الأعضاء" />
           <div className="grid gap-6 md:grid-cols-2">
@@ -172,7 +172,7 @@ export default function GymPage() {
         </div>
       </MotionSection>
 
-      <MotionSection className="px-4 md:px-6 pb-20">
+      <MotionSection className="px-4 pb-20 pt-8 md:px-6 md:pt-10">
         <div className="mx-auto max-w-6xl">
           <GlassCard className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-primary/20">
             <div className="space-y-2 text-sm">
