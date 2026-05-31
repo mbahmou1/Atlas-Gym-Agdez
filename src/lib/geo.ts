@@ -32,27 +32,53 @@ export function distanceToGymKm(userLat: number, userLon: number): number {
 }
 
 /**
- * توجيه من موقعك الحالي → القاعة.
- * ما كنحددوش origin باش Google Maps ياخد GPS الحقيقي ديالك فالتطبيق.
+ * اتجاهات: origin = GPS المستخدم (إحداثيات حية)
+ * destination = موقع القاعة الثابت (رابط Google Maps)
  */
-export function googleMapsDirectionsToGym(): string {
-  const destCoords = `${SITE.latitude},${SITE.longitude}`;
-  return `https://www.google.com/maps/dir/?api=1&destination=${destCoords}&travelmode=driving`;
+export function googleMapsDirectionsFromUser(userLat: number, userLon: number): string {
+  const origin = `${userLat},${userLon}`;
+  const destination = encodeURIComponent(SITE.mapsUrl);
+  return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=driving`;
 }
 
-/** @deprecated استعمل googleMapsDirectionsToGym — بلا origin ثابت */
-export function googleMapsDirectionsUrl(_userLat: number, _userLon: number): string {
-  return googleMapsDirectionsToGym();
-}
-
-/** فتح الاتجاهات (أفضل على التيليفون من window.open) */
-export function openDirectionsToGym(): void {
+function openUrl(url: string): void {
   if (typeof window === "undefined") return;
-  const url = googleMapsDirectionsToGym();
   const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   if (isMobile) {
     window.location.href = url;
   } else {
     window.open(url, "_blank", "noopener,noreferrer");
   }
+}
+
+/** فتح الاتجاهات من إحداثيات GPS محددة */
+export function openDirectionsFromUser(userLat: number, userLon: number): void {
+  openUrl(googleMapsDirectionsFromUser(userLat, userLon));
+}
+
+/** يطلب navigator.geolocation ثم يفتح Maps: origin=GPS ديالك، destination=القاعة */
+export function navigateToGymFromCurrentLocation(
+  onPosition?: (lat: number, lon: number, distanceKm: number) => void
+): Promise<"ok" | "denied" | "unsupported"> {
+  return new Promise((resolve) => {
+    if (typeof window === "undefined" || !navigator.geolocation) {
+      openUrl(SITE.mapsUrl);
+      resolve("unsupported");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude: lat, longitude: lon } = pos.coords;
+        onPosition?.(lat, lon, distanceToGymKm(lat, lon));
+        openDirectionsFromUser(lat, lon);
+        resolve("ok");
+      },
+      () => {
+        openUrl(SITE.mapsUrl);
+        resolve("denied");
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+    );
+  });
 }

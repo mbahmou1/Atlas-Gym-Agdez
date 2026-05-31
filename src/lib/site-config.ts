@@ -10,7 +10,8 @@ export const SITE = {
   addressShort: "أكدز أمام اعدادية النخيل",
   /** إحداثيات القاعة — للتوجيه الديناميكي من موقع الزائر */
   coords: { lat: 30.694, lng: -6.437 },
-  mapsUrl: "https://maps.app.goo.gl/MRkkzK35maaNhQfd8?g_st=iw",
+  /** موقع القاعة على Google Maps (الوجهة الثابتة للتوجيه) */
+  mapsUrl: "https://maps.app.goo.gl/th86DbAAqRRr5Hxm7",
   /** إحداثيات القاعة — أكدز (لحساب المسافة والتوجيه) */
   latitude: 30.694,
   longitude: -6.437,

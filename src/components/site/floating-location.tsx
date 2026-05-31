@@ -5,7 +5,7 @@ import { Loader2, Navigation } from "lucide-react";
 import {
   distanceToGymKm,
   formatDistanceKm,
-  openDirectionsToGym,
+  navigateToGymFromCurrentLocation,
 } from "@/lib/geo";
 import { cn } from "@/lib/utils";
 
@@ -44,13 +44,13 @@ export function FloatingLocation() {
     refreshPosition();
   }, [refreshPosition]);
 
-  const handleClick = () => {
-    // فتح Maps من موقعك الحالي (Google يحدد GPS داخل التطبيق)
-    openDirectionsToGym();
-    // تحديث المسافة إن لم تكن جاهزة
-    if (geo.status !== "ready" && geo.status !== "loading") {
-      refreshPosition();
-    }
+  const handleClick = async () => {
+    setGeo({ status: "loading" });
+    const result = await navigateToGymFromCurrentLocation((lat, lon, distanceKm) => {
+      setGeo({ status: "ready", lat, lon, distanceKm });
+    });
+    if (result === "denied") setGeo({ status: "denied" });
+    if (result === "unsupported") setGeo({ status: "error" });
   };
 
   const isLoading = geo.status === "loading";
@@ -61,11 +61,13 @@ export function FloatingLocation() {
       <button
         type="button"
         onClick={handleClick}
-        aria-label="الاتجاهات من موقعك إلى القاعة"
+        disabled={isLoading}
+        aria-label="الاتجاهات من موقعك الحالي إلى القاعة"
         className={cn(
           "group flex min-h-14 items-center gap-2.5 rounded-full px-4 py-3",
           "bg-primary text-primary-foreground shadow-xl shadow-primary/30",
-          "transition-all hover:scale-[1.03] hover:brightness-110 active:scale-95"
+          "transition-all hover:scale-[1.03] hover:brightness-110 active:scale-95",
+          isLoading && "cursor-wait opacity-90"
         )}
       >
         {isLoading ? (
@@ -78,9 +80,11 @@ export function FloatingLocation() {
             {hasDistance ? "على بعد" : "من موقعك"}
           </span>
           <span className="text-sm font-black">
-            {hasDistance
-              ? `${formatDistanceKm(geo.distanceKm)} → القاعة`
-              : "الاتجاهات للقاعة"}
+            {isLoading
+              ? "جاري تحديد موقعك…"
+              : hasDistance
+                ? `${formatDistanceKm(geo.distanceKm)} → القاعة`
+                : "الاتجاهات للقاعة"}
           </span>
         </span>
       </button>
