@@ -35,6 +35,11 @@ export function ShopClient({ initialProducts }: { initialProducts: Product[] }) 
   }, [initialProducts, search, category]);
 
   const featured = initialProducts.filter((p) => p.featured);
+  const showFeatured = featured.length > 0 && category === "all" && !search;
+  const featuredIds = new Set(featured.map((p) => p.id));
+  const catalogProducts = showFeatured
+    ? filtered.filter((p) => !featuredIds.has(p.id))
+    : filtered;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
@@ -74,7 +79,7 @@ export function ShopClient({ initialProducts }: { initialProducts: Product[] }) 
         ))}
       </div>
 
-      {featured.length > 0 && category === "all" && !search && (
+      {showFeatured && (
         <div className="mb-12">
           <h2 className="mb-4 text-lg font-bold tracking-wide text-primary">منتجات مميزة</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -85,11 +90,18 @@ export function ShopClient({ initialProducts }: { initialProducts: Product[] }) 
         </div>
       )}
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((p) => (
-          <ProductCard key={p.id} product={p} />
-        ))}
-      </div>
+      {catalogProducts.length > 0 && (
+        <>
+          {showFeatured && (
+            <h2 className="mb-4 text-lg font-bold tracking-wide text-foreground">كل المنتجات</h2>
+          )}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {catalogProducts.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </>
+      )}
 
       {filtered.length === 0 && (
         <p className="py-16 text-center text-muted-foreground">ما لقينا حتى منتج.</p>

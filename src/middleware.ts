@@ -9,7 +9,7 @@ function getSecret() {
   return getAuthSecretBytes();
 }
 
-const PUBLIC_PAGES = ["/", "/gym", "/shop", "/contact", "/faq", "/login"];
+const PUBLIC_PAGES = ["/", "/gym", "/shop", "/contact", "/login"];
 
 function isPublicPage(pathname: string) {
   if (PUBLIC_PAGES.includes(pathname)) return true;

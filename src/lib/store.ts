@@ -196,8 +196,8 @@ function ensureShopTables(db: DbData): DbData {
     return { 
       ...p, 
       image_url: img || p.image_url,
-      rating: p.rating || demo?.rating || 4.8,
-      reviews: p.reviews || demo?.reviews || 50 + Math.floor(Math.random() * 100)
+      rating: p.rating ?? demo?.rating ?? 4.8,
+      reviews: p.reviews ?? demo?.reviews ?? 50
     };
   });
   return db;
@@ -542,14 +542,16 @@ export async function createOrder(data: {
   customer_phone: string;
   customer_address: string;
   notes?: string;
-  items: { product_id: string; quantity: number }[];
+  items: { product_id: string; slug?: string; quantity: number }[];
 }) {
   const db = await readDb();
   let total = 0;
   const lineItems: OrderItem[] = [];
 
   for (const item of data.items) {
-    const product = db.products.find((p) => p.id === item.product_id);
+    const product =
+      db.products.find((p) => p.id === item.product_id) ??
+      (item.slug ? db.products.find((p) => p.slug === item.slug) : undefined);
     if (!product) throw new Error(`Product not found: ${item.product_id}`);
     const lineTotal = product.price * item.quantity;
     total += lineTotal;

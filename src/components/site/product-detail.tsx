@@ -48,7 +48,7 @@ export function ProductDetail({ product }: { product: Product }) {
           customer_name: name,
           customer_phone: phone,
           customer_address: address,
-          items: [{ product_id: product.id, quantity: qty, price: product.price }],
+          items: [{ product_id: product.id, slug: product.slug, quantity: qty }],
           total: product.price * qty,
           payment_method: "cod",
         }),

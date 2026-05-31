@@ -1,8 +1,16 @@
-import { randomUUID } from "crypto";
 import type { Product } from "./types";
 import { PRODUCT_IMAGES } from "./product-images";
 
 const now = new Date().toISOString();
+
+/** معرفات ثابتة — ضرورية على Vercel (بلا ملف data/atlasgym.json) */
+const PRODUCT_IDS: Record<string, string> = {
+  "whey-protein-gold": "b4d34222-9314-41a8-922e-62104baa7783",
+  "creatine-monohydrate": "8127b4f0-cffe-4c6c-803a-58fee468ac3f",
+  "multivitamin-elite": "6a0efc23-8e42-44eb-9493-8ab4c403815a",
+  "bcaa-recovery": "ff73d129-9532-4a9d-a8c3-ede7f0bb45dc",
+  "shaker-bottle-pro": "25fde0c2-db74-4966-bab4-abef2b5b84c4",
+};
 
 function product(
   name: string,
@@ -16,7 +24,7 @@ function product(
   reviews: number
 ): Product {
   return {
-    id: randomUUID(),
+    id: PRODUCT_IDS[slug] ?? slug,
     name,
     slug,
     description,

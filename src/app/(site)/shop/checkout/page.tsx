@@ -34,7 +34,11 @@ export default function CheckoutPage() {
           customer_phone: phone,
           customer_address: address,
           notes,
-          items: items.map((i) => ({ product_id: i.productId, quantity: i.quantity })),
+          items: items.map((i) => ({
+            product_id: i.productId,
+            slug: i.slug,
+            quantity: i.quantity,
+          })),
         }),
       });
       if (!res.ok) throw new Error("Order failed");

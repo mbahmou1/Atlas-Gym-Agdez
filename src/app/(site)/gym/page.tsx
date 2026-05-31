@@ -106,7 +106,7 @@ export default function GymPage() {
       <MotionSection className="px-4 py-8 md:px-6 md:py-10">
         <div className="mx-auto max-w-6xl">
           <SectionTitle title="أسعار الاشتراك" />
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {MEMBERSHIP_PLANS.map((plan) => (
               <GlassCard key={plan.id} className={plan.popular ? "border-primary ring-2 ring-primary/30" : ""}>
                 {plan.popular && (
