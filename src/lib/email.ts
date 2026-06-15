@@ -1,6 +1,6 @@
 export async function sendPasswordResetCode(to: string, code: string): Promise<{ ok: true } | { ok: false; error: string }> {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.EMAIL_FROM || "Atlas Agdez Gym <onboarding@resend.dev>";
+  const from = process.env.EMAIL_FROM || "LOUIYNE GYM <onboarding@resend.dev>";
 
   if (!apiKey) {
     return {
@@ -19,10 +19,10 @@ export async function sendPasswordResetCode(to: string, code: string): Promise<{
     body: JSON.stringify({
       from,
       to: [to],
-      subject: "رمز إعادة تعيين كلمة السر — أطلس أكدز جيم",
+      subject: "رمز إعادة تعيين كلمة السر — LOUIYNE GYM",
       html: `
         <div dir="rtl" style="font-family:Tahoma,sans-serif;line-height:1.6">
-          <h2>أطلس أكدز جيم</h2>
+          <h2>LOUIYNE GYM</h2>
           <p>طلبت إعادة تعيين كلمة السر. استعمل هذا الرمز:</p>
           <p style="font-size:28px;font-weight:bold;letter-spacing:4px">${code}</p>
           <p>الرمز صالح لمدة <strong>15 دقيقة</strong>.</p>

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { LayoutDashboard, Menu, ShoppingCart, X } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
+import { SITE } from "@/lib/site-config";
 import { useCart } from "@/components/cart-provider";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -29,7 +30,7 @@ export function SiteNavbar() {
           <BrandLogo size="sm" className="hidden sm:block" />
           <span className="min-w-0 leading-tight">
             <span className="block truncate text-[11px] font-black uppercase tracking-wide text-primary sm:text-lg sm:tracking-wider">
-              Atlas Agdez Gym
+              {SITE.brandLine}
             </span>
             <span className="block truncate text-[10px] font-bold text-foreground sm:text-sm">
               قاعة كمال الأجسام

@@ -38,7 +38,7 @@ export function LocationBlock({
           isHero ? "text-xl md:text-2xl" : "text-lg md:text-xl"
         )}
       >
-        ATLAS AGDEZ GYM
+        {SITE.brandLine}
       </p>
       <p
         className={cn(

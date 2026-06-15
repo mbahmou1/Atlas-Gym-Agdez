@@ -1,7 +1,7 @@
 export const SITE = {
-  name: "أطلس أكدز جيم",
+  name: "LOUIYNE GYM",
   gymTitleAr: "قاعة كمال الأجسام",
-  brandLine: "أطلس أكدز جيم",
+  brandLine: "LOUIYNE GYM",
   tagline: "قوة. انضباط. نتائج.",
   phone: "0687048566",
   whatsapp: "212687048566",

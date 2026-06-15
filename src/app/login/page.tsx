@@ -21,6 +21,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { WhatsAppCta } from "@/components/site/whatsapp-cta";
 import { apiJson, getErrorMessage } from "@/lib/api-client";
+import { SITE } from "@/lib/site-config";
 
 const FEATURES = [
   {
@@ -147,7 +148,7 @@ export default function LoginPage() {
         <Card className="mb-8 border-primary/30 bg-primary/5">
           <CardContent className="py-8 text-center space-y-4">
             <p className="text-sm text-muted-foreground leading-relaxed max-w-md mx-auto">
-              مثال: أطلس أكدز جيم — نفس النظام: موقع للعملاء، لوحة للمدير، أعضاء،
+              مثال: {SITE.brandLine} — نفس النظام: موقع للعملاء، لوحة للمدير، أعضاء،
               اشتراكات، مدفوعات، ومتجر مكملات.
             </p>
             <WhatsAppCta
@@ -177,7 +178,7 @@ export default function LoginPage() {
           {showLogin && (
             <Card className="mt-4 border-border/60">
               <CardHeader className="text-center space-y-2">
-                <CardTitle className="text-xl">أطلس أكدز جيم</CardTitle>
+                <CardTitle className="text-xl">{SITE.brandLine}</CardTitle>
                 <CardDescription>تسجيل دخول المدير — إدارة الصالة</CardDescription>
               </CardHeader>
               <CardContent>

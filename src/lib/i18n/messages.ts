@@ -32,12 +32,12 @@ const ar = {
   signingIn: "جاري الدخول…",
   language: "اللغة",
 
-  loginTitle: "أطلس أكدز جيم",
+  loginTitle: "LOUIYNE GYM",
   loginSubtitle: "تسجيل دخول المدير — إدارة الصالة",
   email: "البريد الإلكتروني",
   password: "كلمة المرور",
 
-  dashboardWelcome: "مرحباً بك في أطلس أكدز جيم",
+  dashboardWelcome: "مرحباً بك في LOUIYNE GYM",
   dashboardSubtitle: "إليك ما يحدث في صالتك اليوم",
   statTotalMembers: "إجمالي الأعضاء",
   statActiveMembers: "أعضاء نشطون",
@@ -120,9 +120,9 @@ const ar = {
   whatsapp: "واتساب",
   whatsappNoPhone: "أضف رقم هاتف صحيح (06XXXXXXXX)",
   whatsappMsgExpired:
-    "السلام عليكم، اشتراككم في أطلس أكدز جيم انتهى. مرحبا بكم لتجديد الاشتراك 💪",
+    "السلام عليكم، اشتراككم في LOUIYNE GYM انتهى. مرحبا بكم لتجديد الاشتراك 💪",
   whatsappMsgReminder:
-    "السلام عليكم، باقي فقط {days} أيام على انتهاء اشتراككم في أطلس أكدز جيم 💪",
+    "السلام عليكم، باقي فقط {days} أيام على انتهاء اشتراككم في LOUIYNE GYM 💪",
 
   errorGeneric: "حدث خطأ",
   errorLoadMembers: "تعذر تحميل الأعضاء",
@@ -181,12 +181,12 @@ const en: Record<keyof typeof ar, string> = {
   signingIn: "Signing in…",
   language: "Language",
 
-  loginTitle: "ATLAS AGDEZ GYM",
+  loginTitle: "LOUIYNE GYM",
   loginSubtitle: "Admin login — gym dashboard",
   email: "Email",
   password: "Password",
 
-  dashboardWelcome: "Welcome to Atlas Agdez Gym",
+  dashboardWelcome: "Welcome to LOUIYNE GYM",
   dashboardSubtitle: "Here is what is happening in your gym today",
   statTotalMembers: "Total members",
   statActiveMembers: "Active members",
@@ -269,9 +269,9 @@ const en: Record<keyof typeof ar, string> = {
   whatsapp: "WhatsApp",
   whatsappNoPhone: "Add a valid phone (06XXXXXXXX)",
   whatsappMsgExpired:
-    "Hello, your Atlas Agdez Gym membership has expired. We welcome you to renew 💪",
+    "Hello, your LOUIYNE GYM membership has expired. We welcome you to renew 💪",
   whatsappMsgReminder:
-    "Hello, only {days} days left until your Atlas Agdez Gym membership expires 💪",
+    "Hello, only {days} days left until your LOUIYNE GYM membership expires 💪",
 
   errorGeneric: "Something went wrong",
   errorLoadMembers: "Could not load members",

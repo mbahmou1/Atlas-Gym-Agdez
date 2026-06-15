@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "متجر المكملات",
-  description: "مكملات للرجال و للنساء — بروتين، كرياتين، قبل التمرين والمزيد — أطلس أكدز جيم.",
+  description: "مكملات للرجال و للنساء — بروتين، كرياتين، وفيتامينات — LOUIYNE GYM.",
 };
 
 export default async function ShopPage() {

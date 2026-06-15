@@ -6,6 +6,7 @@ import type { Product, ProductCategory } from "@/lib/types";
 import { ProductCard } from "@/components/site/product-card";
 import { SectionTitle } from "@/components/site/section-title";
 import { Input } from "@/components/ui/input";
+import { SITE } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 const CATEGORIES: { id: ProductCategory | "all"; label: string }[] = [
@@ -45,7 +46,7 @@ export function ShopClient({ initialProducts }: { initialProducts: Product[] }) 
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
       <SectionTitle
         eyebrow="المتجر"
-        title="مكملات أطلس أكدز"
+        title={`مكملات ${SITE.brandLine}`}
         subtitle="مكملات للرجال و للنساء — دفع عند التسليم أو واتساب."
       />
 

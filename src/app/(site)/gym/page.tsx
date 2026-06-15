@@ -10,7 +10,7 @@ import { formatCurrency } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "القاعة",
-  description: "أطلس أكدز جيم — معدات، اشتراك، مدربون ف أكدز.",
+  description: "LOUIYNE GYM — معدات، اشتراك، مدربون ف أكدز.",
 };
 
 const COACHES = [{ name: "نصير عباسي", role: "مدرب القاعة — كمال الأجسام واللياقة" }];
@@ -28,7 +28,7 @@ export default function GymPage() {
           <Image src={GYM_IMAGES[0]} alt={SITE.brandLine} fill className="object-cover" priority sizes="100vw" />
           <div className="hero-overlay absolute inset-0 flex flex-col items-center justify-center text-center p-6">
             <h1 className="text-3xl font-black text-white md:text-4xl">{SITE.gymTitleAr}</h1>
-            <p className="mt-2 text-lg font-bold text-primary tracking-widest">ATLAS AGDEZ GYM</p>
+            <p className="mt-2 text-lg font-bold text-primary tracking-widest">{SITE.brandLine}</p>
           </div>
         </div>
       </section>

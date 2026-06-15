@@ -30,7 +30,7 @@ export function BrandLogo({
     >
       <Image
         src="/logo.png"
-        alt="Atlas Agdez Gym"
+        alt="LOUIYNE GYM"
         fill
         className="object-cover"
         sizes={`${dimension}px`}
