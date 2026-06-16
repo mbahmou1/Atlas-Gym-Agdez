@@ -29,7 +29,7 @@ export function BrandLogo({
       style={{ width: dimension, height: dimension }}
     >
       <Image
-        src="/logo.png"
+        src="/logo-louiyne.png"
         alt="LOUIYNE GYM"
         fill
         className="object-cover"
