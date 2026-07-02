@@ -10,27 +10,30 @@ import { HERO_IMAGE, SITE } from "@/lib/site-config";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[92vh] overflow-hidden">
-      <Image
-        src={HERO_IMAGE}
-        alt={SITE.brandLine}
-        fill
-        priority
-        className="object-cover"
-        sizes="100vw"
-      />
-      <div className="hero-overlay absolute inset-0" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" />
-      <div className="relative mx-auto flex min-h-[92vh] max-w-6xl flex-col items-center justify-center px-4 py-24 text-center md:px-6">
+    <section className="relative overflow-hidden bg-background">
+      <div className="relative mx-auto max-w-6xl px-4 pt-6 md:px-6 md:pt-8">
+        <div className="relative aspect-[1097/368] w-full overflow-hidden rounded-2xl border border-primary/20 shadow-[0_8px_40px_rgba(196,160,82,0.12)]">
+          <Image
+            src={HERO_IMAGE}
+            alt={SITE.brandLine}
+            fill
+            priority
+            className="object-contain bg-[#0a1628]"
+            sizes="100vw"
+          />
+        </div>
+      </div>
+
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center justify-center px-4 py-10 text-center md:px-6 md:py-14">
         <div className="space-y-6 w-full">
           <LocationBlock variant="hero" />
 
           <h1 className="font-display max-w-3xl mx-auto text-4xl font-extrabold leading-tight md:text-5xl">
             <span className="text-gradient-brand">حوّل جسمك.</span>
             <br />
-            <span className="text-white">ادفع حدودك.</span>
+            <span className="text-foreground">ادفع حدودك.</span>
           </h1>
-          <p className="mx-auto max-w-xl text-lg text-white/85">
+          <p className="mx-auto max-w-xl text-lg text-muted-foreground">
             {SITE.tagline} — قاعة مجهزة و متجر مكملات أصلية.
           </p>
 

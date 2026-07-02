@@ -35,23 +35,20 @@ export const MEMBERSHIP_PLANS = [
   { id: "yearly", nameAr: "سنوي", price: 900, period: "12 شهر", popular: false },
 ] as const;
 
-/** صور قاعة — رجال، معدات، أجواء احترافية */
+/** صور القاعة — LOUIYNE GYM (صور حقيقية) */
 export const GYM_IMAGES = [
-  "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=900&q=85",
-  "https://images.unsplash.com/photo-1540497077202-7bf8a2694f90?w=900&q=85",
-  "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900&q=85",
-  "https://images.unsplash.com/photo-1583454110551-21f2fa2ee61f?w=900&q=85",
-  "https://images.unsplash.com/photo-1534438327276-e14cbf17dda3?w=900&q=85&auto=format",
-  "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&q=85",
+  "/images/gym/gym-interior-1.png",
+  "/images/gym/gym-interior-2.png",
+  "/images/gym/gym-flyer.png",
+  "/images/gym/hero-banner.png",
 ] as const;
 
-export const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1920&q=90";
+export const HERO_IMAGE = "/images/gym/hero-banner.png";
 
 export const HOME_FEATURE_IMAGES = {
-  about: GYM_IMAGES[3],
+  about: GYM_IMAGES[0],
   coaching: GYM_IMAGES[0],
-  equipment: GYM_IMAGES[2],
+  equipment: GYM_IMAGES[1],
   supplements: "https://images.unsplash.com/photo-1593095948074-1c55f10a3526?w=900&q=85",
   womenFitness:
     "https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=900&q=85&auto=format&fit=crop",
